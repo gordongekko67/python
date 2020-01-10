@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<definitions name="TestSicurezza1"
+targetNamespace=http://www.prova.documento.test/
+xmlns:tns=http://www.prova.documento.test/
+xmlns:schema=http://www.prova.schema.test/
+xmlns:xsd=http://www.w3.org/2001/XMLSchema
+xmlns:soap=http://schemas.xmlsoap.org/wsdl/soap/
+xmlns="http://schemas.xmlsoap.org/wsdl/">
+<types>
+<xsd:schema targetNamespace="http://www.prova.documento.test/">
+<xsd:import namespace="http://www.prova.schema.test/" schemaLocation="schema.xsd" />
+</xsd:schema>
+</types>
+<message name="PresentazioneReq">
+<part name="parameter" element="schema:Presentazione" />
+</message>
+<message name="PresentazioneResp">
+<part name="parameter" element="schema:PresentazioneRisposta" />
+</message>
+<portType name="ServizioPresentazioneIF">
+<operation name="Presentazione">
+<input message="tns:PresentazioneReq"/>
+<output message="tns:PresentazioneResp"/>
+</operation>
+</portType>
+<binding name="ServizioPresentazioneImplPortBinding" type="tns:ServizioPresentazioneIF">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="Presentazione">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="PresentazioneService">
+<port name="ServizioPresentazioneImpl" binding="tns:ServizioPresentazioneImplPortBinding">
+<soap:address location="http://localhost:8080/Presentazione/PresentazioneService/ServizioPresentazioneIF"/>
+</port>
+</service>
+</definitions>
